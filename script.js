@@ -1,4 +1,3 @@
-// script.js
 const formData = [
     {
         "id": "c0ac49c5-871e-4c72-a878-251de465e6b4",
@@ -38,9 +37,11 @@ function renderForm() {
     form.innerHTML = '';
     formData.forEach(item => {
         const div = document.createElement('div');
+        const div2 = document.createElement('div');
+        div2.classList.add('div2');
         div.classList.add('form-element');
-        div.setAttribute('draggable', true); // Add draggable attribute
-        div.setAttribute('data-id', item.id); // Set data-id attribute to identify elements
+        div.setAttribute('draggable', true); //  draggable attribute
+        div.setAttribute('data-id', item.id); //  data-id attribute to identify elements
         let inputElement;
         if (item.type === 'input' || item.type === 'textarea') {
             inputElement = document.createElement(item.type);
@@ -54,16 +55,17 @@ function renderForm() {
             });
         }
         const label = document.createElement('label');
-        label.textContent = item.label;
+        label.textContent = item.type.toUpperCase();
 
-        // Add delete button
+        // delete button
         const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
+        deleteBtn.innerHTML = `<img src='images/del.png' height='12px'/>`;
         deleteBtn.addEventListener('click', () => deleteElement(item.id));
 
-        div.appendChild(label);
-        div.appendChild(inputElement);
-        div.appendChild(deleteBtn); // Append delete button
+        div2.appendChild(label);
+        div2.appendChild(deleteBtn);
+        div.appendChild(div2);
+        div.appendChild(inputElement); 
         form.appendChild(div);
     });
 }
